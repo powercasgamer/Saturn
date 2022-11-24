@@ -1,0 +1,11 @@
+[versions]
+annotations = "23.0.0"
+titan = "1.0.89-SNAPSHOT"
+kotlin = "1.7.21"
+
+[libraries]
+kotlin-std = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+annotations = { module = "org.jetbrains:annotations", version.ref = "annotations" }
+
+[plugins]
+titan = { id = "net.deltapvp.titan", version.ref = "titan" }
