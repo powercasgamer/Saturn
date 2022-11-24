@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "local>DeltaPvPNET/.github:renovate-config",
+    ":dependencyDashboard"
+  ],
+  "ignoreDeps": [],
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "matchPackagePrefixes": [
+        "com.github.ben-manes.caffeine:caffeine"
+      ],
+      "enabled": false
+    }
+  ]
+}

@@ -29,9 +29,4 @@ Go to the project directory
   cd Saturn
 ```
 
-Start the server
-
-```bash
-  ./gradlew build
-```
 

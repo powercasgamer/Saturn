@@ -1,0 +1,61 @@
+name: "build"
+
+on:
+  push:
+    branches: ["**"]
+    tags-ignore: ["**"]
+  pull_request:
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.event.number || github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # Only run on PRs if the source branch is on someone else's repo
+    if: "${{ github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name }}"
+    strategy:
+      matrix:
+        java: ["17"]
+        os: ["ubuntu-latest"]
+    runs-on: "${{ matrix.os }}"
+    steps:
+      - name: "checkout repository"
+        uses: actions/checkout@v3
+
+      - name: "validate gradle wrapper"
+        uses: "gradle/wrapper-validation-action@v1"
+
+      - name: "Setup JDK ${{ matrix.java }}"
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "${{ matrix.java }}"
+          cache: "gradle"
+
+      # Actually build
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.gradle/notifications
+            ~/.gradle/jdks
+            .gradle/loom-cache
+            .gradle/caches/VanillaGradle
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/libs.versions.*', '**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-deltapvp-
+
+      - name: "run gradle build"
+        uses: "gradle/gradle-build-action@v2"
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && !(endsWith(github.ref, '-dev') && startsWith(github.ref, 'refs/heads/')) }}
+          arguments: "build --stacktrace"
+
+      - name: Cleanup Gradle Cache
+        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
