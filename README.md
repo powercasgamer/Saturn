@@ -20,7 +20,7 @@ Please adhere to this project's `code of conduct`.
 Clone the project
 
 ```bash
-  git clone https://github.com/powercasgamer/Saturn
+  git clone https://github.com/powercasgamer/Saturn.git
 ```
 
 Go to the project directory
