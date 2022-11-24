@@ -4,5 +4,4 @@ dependencies {
 
 shadowJar {
     relocate("kotlin", "net.deltapvp.saturn.lib.kotlin")
-    configurations = [project.configurations.compileClasspath]
 }
