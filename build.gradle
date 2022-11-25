@@ -36,18 +36,6 @@ subprojects {
         publications {
             shadow(MavenPublication) { publication ->
                 project.shadow.component(publication)
-                pom {
-                    withXml(xml -> {
-                        Node repos = xml.asNode().appendNode("repositories")
-                        project.repositories.findAll {
-                            if (it instanceof MavenArtifactRepository && it.url.toString().startsWith("https")) {
-                                Node repository = repos.appendNode("repository")
-                                repository.appendNode("id", it.url.toString().replace("https://", "").replace(".", "-").replace("/", "-"))
-                                repository.appendNode("url", it.url.toString())
-                            }
-                        }
-                    })
-                }
                 versionMapping {
                     usage(Usage.JAVA_API) { fromResolutionOf(JavaPlugin.RUNTIME_CLASSPATH_CONFIGURATION_NAME) }
                     usage(Usage.JAVA_RUNTIME) { fromResolutionResult() }
