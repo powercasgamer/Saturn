@@ -5,5 +5,5 @@ dependencies {
 }
 
 shadowJar {
-    relocate("kotlin", "net.deltapvp.saturn.lib.kotlin")
+//    relocate("kotlin", "net.deltapvp.saturn.lib.kotlin")
 }
