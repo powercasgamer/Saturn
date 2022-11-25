@@ -24,7 +24,7 @@ subprojects {
             maven {
                 name = "delta"
                 def releasesRepoUrl = "https://reposilite.deltapvp.net/releases/"
-                def snapshotsRepoUrl = "https://reposilite.deltapvp.net/releases/"
+                def snapshotsRepoUrl = "https://reposilite.deltapvp.net/snapshots/"
                 url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
                 credentials(PasswordCredentials)
                 authentication {
