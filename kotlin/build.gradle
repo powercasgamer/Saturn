@@ -1,5 +1,7 @@
 dependencies {
-    api(libs.kotlin.std)
+    api(libs.kotlin.std) {
+        exclude group: "org.jetbrains", module: "annotations"
+    }
 }
 
 shadowJar {
