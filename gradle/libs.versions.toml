@@ -1,7 +1,7 @@
 [versions]
 annotations = "23.0.0"
 titan = "1.0.89-SNAPSHOT"
-kotlin = "1.7.21"
+kotlin = "1.7.22"
 
 [libraries]
 kotlin-std = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
