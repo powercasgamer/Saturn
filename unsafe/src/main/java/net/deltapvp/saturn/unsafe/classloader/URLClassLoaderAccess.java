@@ -35,6 +35,8 @@ import java.util.Collection;
 
 /**
  * Provides access to {@link URLClassLoader}#addURL.
+ *
+ * @author <a href="https://github.com/Laarryy/Anti-VPN/blob/v6-j17/Common/src/main/java/me/egg82/antivpn/dependencies/InjectUtil.java">...</a>
  */
 public abstract class URLClassLoaderAccess {
 
@@ -56,6 +58,10 @@ public abstract class URLClassLoaderAccess {
 
     @Nullable private final URLClassLoader classLoader;
 
+    /**
+     *
+     * @param classLoader the classloader to inject to
+     */
     protected URLClassLoaderAccess(@Nullable final URLClassLoader classLoader) {
         this.classLoader = classLoader;
     }

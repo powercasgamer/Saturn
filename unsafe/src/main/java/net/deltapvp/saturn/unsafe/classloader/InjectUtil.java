@@ -30,6 +30,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLClassLoader;
 
+/**
+ * @author <a href="https://github.com/Laarryy/Anti-VPN/blob/v6-j17/Common/src/main/java/me/egg82/antivpn/dependencies/InjectUtil.java">...</a>
+ */
 public final class InjectUtil {
     private InjectUtil() {
     }

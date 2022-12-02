@@ -29,7 +29,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -230,6 +229,7 @@ buildNumber.properties
 !.vscode/launch.json
 !.vscode/extensions.json
 bin/
+logs/
 .settings/
 .console_history
 start.sh

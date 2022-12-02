@@ -9,6 +9,10 @@ subprojects {
     apply plugin: "maven-publish"
     apply plugin: "net.deltapvp.titan"
 
+    repositories {
+        mavenCentral()
+    }
+
     dependencies {
         compileOnly(libs.annotations)
     }

@@ -22,6 +22,9 @@ jobs:
     steps:
       - name: "checkout repository"
         uses: actions/checkout@v3
+      - name: Make wrapper executable
+        run: |
+          chmod +x gradlew
 
       - name: "validate gradle wrapper"
         uses: "gradle/wrapper-validation-action@v1"
@@ -43,6 +46,7 @@ jobs:
             ~/.gradle/jdks
             .gradle/loom-cache
             .gradle/caches/VanillaGradle
+            ~/.konan
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/libs.versions.*', '**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-deltapvp-
@@ -50,8 +54,13 @@ jobs:
       - name: "run gradle build"
         uses: "gradle/gradle-build-action@v2"
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/master' && !(endsWith(github.ref, '-dev') && startsWith(github.ref, 'refs/heads/')) }}
+          cache-read-only: "${{ !startsWith(github.ref, 'refs/heads/master/') || github.event_name == 'pull_request' }}"
           arguments: "build --stacktrace"
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: "**/build/libs/*.jar"
 
       - name: Cleanup Gradle Cache
         # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
