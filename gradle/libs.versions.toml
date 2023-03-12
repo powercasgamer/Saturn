@@ -1,5 +1,5 @@
 [versions]
-annotations = "23.0.0"
+annotations = "24.0.1"
 titan = "1.0.91-SNAPSHOT"
 kotlin = "1.7.22"
 
