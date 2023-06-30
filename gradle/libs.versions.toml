@@ -1,6 +1,6 @@
 [versions]
 annotations = "23.0.0"
-titan = "1.0.91-SNAPSHOT"
+titan = "1.0.113"
 kotlin = "1.7.22"
 
 [libraries]
